@@ -10,23 +10,24 @@ import java.util.Arrays;
 public class Manager {
     private Repo ticketRepo;
 
-    public Manager(Repo ticketRepo){
+    public Manager(Repo ticketRepo) {
         this.ticketRepo = ticketRepo;
     }
 
-    public void add(Ticket ticket){
+    public void add(Ticket ticket) {
         ticketRepo.add(ticket);
     }
 
-    public Ticket[] findAll(String departureIATA, String arrivalIATA){
+    public Ticket[] findAll(String departureIATA, String arrivalIATA) {
         Ticket[] result = new Ticket[0];
-        for (Ticket ticket : ticketRepo.findAll()){
-            if(matches(ticket,departureIATA,arrivalIATA)){
-                Ticket[] tmp = new Ticket[result.length+1];
-                for(int i = 0; i < result.length; i++){
-                    tmp[i] = ticket;
-                    result = tmp;
+        for (Ticket ticket : ticketRepo.findAll()) {
+            if (matches(ticket, departureIATA, arrivalIATA)) {
+                Ticket[] tmp = new Ticket[result.length + 1];
+                for (int i = 0; i < result.length; i++) {
+                    tmp[i] = result[i];
                 }
+                tmp[tmp.length - 1] = ticket;
+                result = tmp;
             }
         }
         Arrays.sort(result);
@@ -35,11 +36,10 @@ public class Manager {
 
 
     private boolean matches(Ticket ticket, String departureIATA, String arrivalIATA) {
-        if (ticket.getDepartureIATA().contains(departureIATA)) {
-            if (ticket.getArrivalIATA().contains(arrivalIATA)) {
+        if (ticket.getDepartureIATA().contains(departureIATA) & ticket.getArrivalIATA().contains(arrivalIATA)) {
                 return true;
             }
-        }
+
         return false;
 
     }

@@ -1,6 +1,6 @@
 package domain;
 
-public class Ticket {
+public class Ticket implements Comparable<Ticket>{
     protected int id;
     protected int price;
     protected String departureIATA;
@@ -53,5 +53,10 @@ public class Ticket {
 
     public void setTravelTime(int travelTime) {
         this.travelTime = travelTime;
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        return price - o.getPrice();
     }
 }
