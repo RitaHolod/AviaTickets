@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import repo.Repo;
 import manager.Manager;
 
+import java.util.Comparator;
+
 public class TestManager {
 
 
@@ -32,12 +34,13 @@ public class TestManager {
     }
 
     @Test
-    public void ShouldSort(){
+    public void ShouldSortByTime(){
+        Comparator<Ticket> comparator = new TicketComparator();
 
-    Ticket[] expected = {ticket2, ticket1, ticket7, ticket6};
-    Ticket[] actual = manager.findAll("KZN", "SVO");
+        Ticket[] expected = {ticket6, ticket7, ticket2, ticket1};
+        Ticket[] actual = manager.findAll("KZN", "SVO", comparator);
 
-    Assertions.assertArrayEquals(expected,actual);
+        Assertions.assertArrayEquals(expected,actual);
     }
 
 

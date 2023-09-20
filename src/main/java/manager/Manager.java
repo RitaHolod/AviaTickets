@@ -5,6 +5,7 @@ import domain.Ticket;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
 
 
 public class Manager {
@@ -19,7 +20,7 @@ public class Manager {
         ticketRepo.add(ticket);
     }
 
-    public Ticket[] findAll(String departureIATA, String arrivalIATA) {
+    public Ticket[] findAll(String departureIATA, String arrivalIATA, Comparator<Ticket> comparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : ticketRepo.findAll()) {
             if (matches(ticket, departureIATA, arrivalIATA)) {
@@ -31,7 +32,7 @@ public class Manager {
                 result = tmp;
             }
         }
-        Arrays.sort(result);
+        Arrays.sort(result, comparator);
         return result;
     }
 
