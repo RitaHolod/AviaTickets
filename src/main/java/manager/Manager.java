@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class Manager {
     private Repo ticketRepo;
+    Ticket[] tickets = new Ticket[0];
 
     public Manager(Repo ticketRepo) {
         this.ticketRepo = ticketRepo;
@@ -33,6 +34,7 @@ public class Manager {
         Arrays.sort(result);
         return result;
     }
+
 
 
     private boolean matches(Ticket ticket, String departureIATA, String arrivalIATA) {

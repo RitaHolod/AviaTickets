@@ -1,14 +1,12 @@
-package manager;
+package repo;
 
 import domain.Ticket;
+import manager.Manager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repo.Repo;
-import manager.Manager;
 
-public class TestManager {
-
+public class TestRepo {
 
     Repo repo = new Repo();
     Manager manager = new Manager(repo);
@@ -22,24 +20,22 @@ public class TestManager {
 
     @BeforeEach
     public void setup() {
-        manager.add(ticket1);
-        manager.add(ticket2);
-        manager.add(ticket3);
-        manager.add(ticket4);
-        manager.add(ticket5);
-        manager.add(ticket6);
-        manager.add(ticket7);
+        repo.add(ticket1);
+        repo.add(ticket2);
+        repo.add(ticket3);
+        repo.add(ticket4);
+        repo.add(ticket5);
+        repo.add(ticket6);
+        repo.add(ticket7);
     }
-
     @Test
-    public void ShouldSort(){
+    public void ShouldRemoveById(){
 
-    Ticket[] expected = {ticket2, ticket1, ticket7, ticket6};
-    Ticket[] actual = manager.findAll("KZN", "SVO");
+        repo.RemoveById(17);
 
-    Assertions.assertArrayEquals(expected,actual);
+        Ticket[] expected = {ticket1,ticket2,ticket3,ticket4,ticket5,ticket6};
+        Ticket[] actual= repo.findAll();
+
+        Assertions.assertArrayEquals(expected,actual);
     }
-
-
-
 }
